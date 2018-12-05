@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ajax局部刷新</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<style>
+
+</style>
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+</head>
+<body>
+      
+<div class="lib_container">
+<div class="firstLine">
+  <a href="#"><span class="glyphicon glyphicon-star"></span> 收藏本站</a>
+  <a href="#"><span class="glyphicon glyphicon-phone"></span> 移动客户端</a>
+  <a><img src="images/weixin_sign.png"/></a>
+  <a href="#">首页</a>
+  <a href="#">登录</a>
+</div>
+<div class="secLine">
+  <div>
+      <img src="images/st_sutulib_sign.png"/>
+  </div>
+  <div>
+      <form action="">
+          <input type="text" name="submit" style="width:300px; height:30px"/>
+          <input type="submit" value="搜索" style="height:30px"/>
+      </form>
+      <div>
+          <span>热门搜索 : </span>
+          <a href="#">绘本</a>
+          <a href="#">米小圈</a>
+          <a href="#">东野圭吾</a>
+          <a href="#">人格心理学</a>
+          <a href="#">言情小说</a>
+          <a href="#">哈利波特</a>
+      </div>
+  </div>
+</div>
+
+<div>
+    <div class="con_left">
+        <div>馆藏分类</div>
+        <ul class="category">
+            <li data-id="philosophy">
+    			<a href="javascript:;">哲学/宗教</a>
+               	<span class="glyphicon glyphicon-chevron-right"></span>
+            </li>
+            <li data-id="politics">
+            	<a href="javascript:;">政治/法律</a>
+               	<span class="glyphicon glyphicon-chevron-right"></span>
+            </li>
+            <li data-id="military">
+            	<a href="javascript:;">军事</a>
+               	<span class="glyphicon glyphicon-chevron-right"></span>
+            </li>
+            <li data-id="biology">
+            	<a href="javascript:;">生物科学</a>
+               	<span class="glyphicon glyphicon-chevron-right"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="con_right1">  
+        <div id="content"></div>
+        <div class="abc">
+        	<div class="con_center">
+                <div>
+                    <img src="images/003_st.png"/>
+                </div>
+                <div><a href="#">更多新书>>></a></div>
+                <div class="newBooks">
+                    <figure>
+                        <img src="images/20181126113054706.png"/>
+                        <figcaption><a href="#">导弹和向日葵</a></figcaption>
+                        <figcaption>王凯著</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/20181126112255783.jpg"/>
+                        <figcaption><a href="#">疯犬少年的春天</a></figcaption>
+                        <figcaption>里则林著</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/20181126112127338.jpg"/>
+                        <figcaption><a href="#">终点的少女</a></figcaption>
+                        <figcaption>(日)柚木麻子著</figcaption>
+                    </figure>
+                </div>
+                <div class="newBooks">
+                    <figure>
+                        <img src="images/9787540477721.jpg"/>
+                        <figcaption><a href="#">艾约堡秘史</a></figcaption>
+                        <figcaption>张炜著</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/20181126011944455.jpg"/>
+                        <figcaption><a href="#">我们连孤独都不曾拥有</a></figcaption>
+                        <figcaption>邓培君著</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/20181120110126837.jpg"/>
+                        <figcaption><a href="#">敌人的樱花</a></figcaption>
+                        <figcaption>明晓溪著</figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="con_right">
+                <div class="selectBook">
+                    <a href="#">你选书我买单</a>
+                    <a href="#">更多>>></a>
+                </div>
+        
+                <ul>
+                    <li><a href="#">1, 长恨书</a></li>
+                    <li><a href="#">2, 给孩子讲时间简史</a></li>
+                    <li><a href="#">3, 嘿三十岁</a></li>
+                    <li><a href="#">4, 给心里种一片阳光</a></li>
+                    <li><a href="#">5, 常用穴位-海派儿科推拿</a></li>
+                    <li><a href="#">6, 遇见更好的自己</a></li>                
+                </ul>
+        
+                <div class="commendBook">
+                    <a href="#">图书推荐</a>
+                    <a href="#">更多>>></a>
+                </div>
+        
+                <ul>
+                    <li><a href="#">1, 长恨书</a></li>
+                    <li><a href="#">2, 给孩子讲时间简史</a></li>
+                    <li><a href="#">3, 嘿三十岁</a></li>
+                    <li><a href="#">4, 给心里种一片阳光</a></li>
+                    <li><a href="#">5, 常用穴位-海派儿科推拿</a></li>
+                    <li><a href="#">6, 遇见更好的自己</a></li>
+                    <li><a href="#">7, 治愈系可爱小鸟刺绣350款</a></li>
+                    <li><a href="#">8, 治愈系可爱狗狗刺绣380款</a></li>
+                </ul>
+      
+            </div>
+        </div>
+    </div>
+</div>
+
+</div> 
+  <script>
+      $(function() {
+          $(".category").on("click", "li", function() {
+              var sId = $(this).data("id"); //获取data-id的值
+              window.location.hash = sId; //设置锚点
+              loadInner(sId);
+			  $(".abc").hide();
+          });
+
+          function loadInner(sId) {
+              var sId = window.location.hash;
+              var pathn, i;
+              switch(sId) {
+                  case "#philosophy":
+                      pathn = "philosophy.html";
+                      i = 0;
+                      break;　　　　　　　
+                  case "#politics":
+                      pathn = "politics.html";
+                      i = 1;
+                      break;
+                  case "#military":
+                      pathn = "military.html";
+                      i = 2;
+                      break;
+                  case "#biology":
+                      pathn = "biology.html";
+                      i = 3;
+                      break;　　　　　　
+              }
+              $("#content").load(pathn+"?t="+(new Date().getTime())); //加载相对应的内容
+			  
+              $(".category li").eq(i).addClass("current").siblings().removeClass("current"); //当前列表高亮
+          }
+          var sId = window.location.hash;
+          loadInner(sId);
+      });
+  </script>
+</body>
+</html>
